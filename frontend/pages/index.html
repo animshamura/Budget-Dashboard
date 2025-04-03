@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col items-center min-h-screen pt-20">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full flex justify-center gap-10 text-lg uppercase font-semibold text-white bg-indigo-600 p-4 shadow-lg">
+        <a href="subsidiary.html" class="transition-colors hover:text-gray-300">Subsidiary Breakdown</a>
+        <a href="sector.html" class="transition-colors hover:text-gray-300">Sector Breakdown</a>
+        <a href="transactions.html" class="transition-colors hover:text-gray-300">Transactions</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="bg-white p-10 rounded-3xl shadow-lg w-11/12 md:w-3/4 lg:w-1/2 text-center mt-20">
+        <h1 class="text-4xl font-bold text-gray-800 mb-5">📊 Budget Overview</h1>
+        <p class="text-xl text-gray-600 mb-8">Track revenue and spending trends with dynamic visualizations.</p>
+        
+        <!-- Chart Container -->
+        <div class="relative bg-gray-50 rounded-2xl shadow-lg h-96 p-6">
+            <canvas id="revenueSpentChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Generate fake data for Revenue and Spent
+        function generateFakeData() {
+            let revenue = [];
+            let spent = [];
+            // Create random data points for 6 months
+            for (let i = 0; i < 6; i++) {
+                revenue.push(Math.floor(Math.random() * 10000) + 10000);  // Random revenue between 10k to 20k
+                spent.push(Math.floor(Math.random() * 8000) + 5000); // Random spent between 5k to 13k
+            }
+            return { revenue, spent };
+        }
+
+        function updateChart(revenue, spent) {
+            const ctx = document.getElementById("revenueSpentChart").getContext("2d");
+            new Chart(ctx, {
+                type: "line", // Line chart with smooth curve
+                data: {
+                    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"], // Months labels
+                    datasets: [
+                        {
+                            label: "Revenue",
+                            data: revenue,
+                            fill: true,
+                            backgroundColor: "rgba(40, 167, 69, 0.3)", // Soft green for revenue
+                            borderColor: "rgba(40, 167, 69, 1)",
+                            borderWidth: 3,
+                            lineTension: 0.4, // Smooth curve
+                            pointBackgroundColor: "#28a745",
+                            pointBorderColor: "#28a745",
+                        },
+                        {
+                            label: "Spent",
+                            data: spent,
+                            fill: true,
+                            backgroundColor: "rgba(220, 53, 69, 0.3)", // Soft red for spent
+                            borderColor: "rgba(220, 53, 69, 1)",
+                            borderWidth: 3,
+                            lineTension: 0.4, // Smooth curve
+                            pointBackgroundColor: "#dc3545",
+                            pointBorderColor: "#dc3545",
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: "easeOutQuart"
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: "#ddd" }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { font: { size: 14, weight: "bold" }, color: "#495057" }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Fetch fake data and update chart
+        const { revenue, spent } = generateFakeData();
+        updateChart(revenue, spent);
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <script defer src="transactions.js"></script>
+    <!-- Add Tailwind CSS CDN link -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 h-full flex flex-col items-center p-5">
+
+    <!-- Navigation Bar with Purple Background -->
+    <nav class="bg-indigo-600 p-4 shadow-md">
+        <ul class="flex justify-center gap-6 text-white text-lg uppercase font-semibold">
+            <li><a href="index.html" class="transition-colors hover:text-gray-300">Home</a></li>
+            <li><a href="subsidiary.html" class="transition-colors hover:text-gray-300">Subsidiary Breakdown</a></li>
+            <li><a href="sector.html" class="transition-colors hover:text-gray-300">Sector Breakdown</a></li>
+            <!-- <li><a href="add.html" class="transition-colors hover:text-gray-300">Add Transaction</a></li> -->
+        </ul>
+    </nav>
+
+    <h2 class="mt-6 text-3xl font-semibold">Transaction History</h2>
+
+    <!-- Transaction Table with Enlarged Size and Responsiveness -->
+    <div class="overflow-x-auto mt-6 w-full max-w-7xl">
+        <table id="transactionTable" class="min-w-full bg-white border-separate shadow-lg rounded-lg overflow-hidden table-auto">
+            <thead>
+                <tr>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">Transaction ID</th>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">Amount</th>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">Date</th>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">Subsidiary</th>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">Sector</th>
+                    <th class="px-6 py-4 bg-blue-600 text-white text-center">User ID</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <!-- Transactions will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="flex space-x-3 mt-6 items-center">
+        <button id="prevPage" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed" disabled>Previous</button>
+        <span id="pageNumber" class="text-lg">Page: 1</span>
+        <button id="nextPage" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Next</button>
+    </div>
+
+</body>
+</html>
