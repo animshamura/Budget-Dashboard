@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sector Budget</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 h-full flex flex-col items-center p-5">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-indigo-600 p-4 shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-lg font-bold">Sector Budget</h1>
+            <button id="menu-btn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
+            <div id="menu" class="hidden md:flex gap-6 text-white text-lg uppercase font-semibold">
+                <a href="index.html" class="transition-colors hover:text-gray-300">Home</a>
+                <a href="subsidiary.html" class="transition-colors hover:text-gray-300">Subsidiary Breakdown</a>
+                <a href="transactions.html" class="transition-colors hover:text-gray-300">Transactions</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-indigo-600 text-white w-full p-4 space-y-3 text-center mt-16">
+        <a href="index.html" class="hover:text-gray-300">Home</a>
+        <a href="subsidiary.html" class="hover:text-gray-300">Subsidiary Breakdown</a>
+        <a href="transactions.html" class="hover:text-gray-300">Transactions</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container mx-auto p-6 mt-20">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sector Budget Breakdown</h2>
+        
+        <!-- Chart Containers -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div class="chart-container bg-white p-6 rounded-lg shadow-md">
+                <canvas id="sectorBarChart"></canvas>
+            </div>
+            <div class="chart-container bg-white p-6 rounded-lg shadow-md">
+                <canvas id="sectorPieChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Detailed Sector Information -->
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">Detailed Sector Information</h2>
+        <div class="overflow-x-auto bg-white shadow-md rounded-lg">
+            <table class="min-w-full text-center border-separate table-auto">
+                <thead class="bg-indigo-600 text-white">
+                    <tr>
+                        <th class="p-4 text-center">Sector</th>
+                        <th class="p-4 text-center">Allocated Budget</th>
+                        <th class="p-4 text-center">Total Spent</th>
+                        <th class="p-4 text-center">Remaining Budget</th>
+                    </tr>
+                </thead>
+                <tbody id="sector-table" class="text-gray-700">
+                    <tr><td colspan="4" class="p-4 text-center">Loading sector data...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("menu-btn").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+    </script>
+
+</body>
+</html>

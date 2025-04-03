@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 flex flex-col items-center min-h-screen pt-20">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-indigo-600 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-white text-lg font-bold">Budget Dashboard</h1>
+            <button id="menu-btn" class="text-white text-2xl md:hidden focus:outline-none">☰</button>
+            <div id="menu" class="hidden md:flex gap-10 text-lg uppercase font-semibold text-white">
+                <a href="subsidiary.html" class="transition-colors hover:text-gray-300">Subsidiary Breakdown</a>
+                <a href="sector.html" class="transition-colors hover:text-gray-300">Sector Breakdown</a>
+                <a href="transactions.html" class="transition-colors hover:text-gray-300">Transactions</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col bg-indigo-600 text-white w-full p-4 space-y-3 text-center">
+        <a href="subsidiary.html" class="hover:text-gray-300">Subsidiary Breakdown</a>
+        <a href="sector.html" class="hover:text-gray-300">Sector Breakdown</a>
+        <a href="transactions.html" class="hover:text-gray-300">Transactions</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="bg-white p-10 rounded-3xl shadow-lg w-11/12 sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 text-center mt-20">
+        <h1 class="text-4xl font-bold text-gray-800 mb-5">📊 Budget Overview</h1>
+        <p class="text-xl text-gray-600 mb-8">Track revenue and spending trends with dynamic visualizations.</p>
+        
+        <!-- Chart Container -->
+        <div class="relative bg-gray-50 rounded-2xl shadow-lg h-80 sm:h-96 md:h-[400px] lg:h-[450px] xl:h-[500px] p-6">
+            <canvas id="revenueSpentChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById("menu-btn").addEventListener("click", function() {
+            document.getElementById("mobile-menu").classList.toggle("hidden");
+        });
+
+        // Generate dynamic data for Revenue and Spent
+        function generateFakeData(months = 6) {
+            let revenue = [];
+            let spent = [];
+            let labels = [];
+            for (let i = 0; i < months; i++) {
+                labels.push(new Date(2024, i).toLocaleString('default', { month: 'short' }));
+                revenue.push(Math.floor(Math.random() * 20000) + 5000);
+                spent.push(Math.floor(Math.random() * 15000) + 3000);
+            }
+            return { labels, revenue, spent };
+        }
+
+        function updateChart(labels, revenue, spent) {
+            const ctx = document.getElementById("revenueSpentChart").getContext("2d");
+            new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Revenue",
+                            data: revenue,
+                            fill: true,
+                            backgroundColor: "rgba(40, 167, 69, 0.3)",
+                            borderColor: "rgba(40, 167, 69, 1)",
+                            borderWidth: 3,
+                            lineTension: 0.4,
+                            pointBackgroundColor: "#28a745",
+                            pointBorderColor: "#28a745",
+                        },
+                        {
+                            label: "Spent",
+                            data: spent,
+                            fill: true,
+                            backgroundColor: "rgba(220, 53, 69, 0.3)",
+                            borderColor: "rgba(220, 53, 69, 1)",
+                            borderWidth: 3,
+                            lineTension: 0.4,
+                            pointBackgroundColor: "#dc3545",
+                            pointBorderColor: "#dc3545",
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 2000,
+                        easing: "easeOutQuart"
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: "#ddd" }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { font: { size: 14, weight: "bold" }, color: "#495057" }
+                        }
+                    }
+                }
+            });
+        }
+
+        const { labels, revenue, spent } = generateFakeData(6);
+        updateChart(labels, revenue, spent);
+    </script>
+</body>
+</html>
