@@ -74,7 +74,7 @@ This project is a full-stack web application that takes data input from a CSV fi
    - Run the index.html:
      ```bash
      cd pages
-     start index.htmk
+     start index.html
      ```
 
 6. **Upload CSV**: 
