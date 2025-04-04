@@ -2,7 +2,7 @@
 
 # Budget Dashboard
 
-<div align="center">
+<div align="justify">
 This project is a full-stack web application that takes data input from a CSV file, pushes it into a PostgreSQL database, and provides a user-friendly interface to view and manage the data. The backend is built using FastAPI, while the frontend is styled using Tailwind CSS for responsiveness.
 </div>
 
