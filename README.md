@@ -35,8 +35,8 @@ This project is a full-stack web application that takes data input from a CSV fi
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/animshamura/Budget-FullStack.git
-   cd Budget-FullStack
+   git clone https://github.com/animshamura/Budget-Dashboard.git
+   cd Budget-Dashboard
    cd backend
    ```
 
